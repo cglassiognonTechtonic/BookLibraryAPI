@@ -24,8 +24,11 @@ let db = [
   {
     id: 2,
     title: "Catalyst",
+    "ISBN-10": 123,
+    "ISBN-13": 456,
+    publisher: "",
     author: "SJ Kincaid",
-    pubDate: "10/28/2014",
+    "published-date": "10/28/2014",
     synopsis:
       "Tom Raines and his friends return to the Pentagonal Spire for a new year, eager to continue their training for the elite Intrasolar Forces. But they soon discover troubling changes. Strict new regulations, suspicious agents in positions of power and the revelation that the Spire is under military control. The trainees are now cadets. What begins as an irritating adjustment soon reveals a dangerous shift in reality. Those in control have a ruthless agenda. And when the military academy begins welcoming suspicious new cadets, they reveal a plan with horrifying worldwide ramifications. Tom is desperate to stop it, and it seems he is not alone. But when the enemy comes for Tom, how much can he endure in the battle to save himself? In this exhilarating, explosive and heart-rending conclusion to the INSIGNIA trilogy, CATALYST puts Tom and his intelligent, passionate and brave young friends through stunning tests, dangerous confrontations and into an impossible future they could never have predicted.",
     cover:
@@ -34,46 +37,48 @@ let db = [
   },
 ];
 
-module.exports.response = (req, res) => {
-  res.send(`Welcome to the Library Project API`);
-};
-module.exports.getBook = (req, res) => {
-  if (db.findIndex((book) => book.id == req.params.id) != -1) {
-    res.json(db.find((book) => book.id == req.params.id));
-  } else {
-    res.status(404).send("Book Not Found");
-  }
-};
-module.exports.addBook = (req, res) => {
-  const equal = (book) =>
-    book.author == req.body.author && book.title == req.body.title;
-  if (db.findIndex(equal) == -1) {
-    db.push(req.body);
-    if (db.findIndex((book) => book.id == req.body.id) != -1) {
-      res.send("Book Created");
+module.exports = {
+  response: (req, res) => {
+    res.send(`Welcome to the Library Project API`);
+  },
+  getBook: (req, res) => {
+    if (db.findIndex((book) => book.id == req.params.id) != -1) {
+      res.json(db.find((book) => book.id == req.params.id));
     } else {
-      res.status(500).send();
+      res.status(404).send("Book Not Found");
     }
-  } else {
-    res.status(409).send("Book Already Exists");
-  }
-};
-module.exports.editBook = (req, res) => {
-  if (db.findIndex((book) => book.id == req.params.id) != -1) {
-    let originalBook = db.find((book) => book.id == req.params.id);
-    let newBook = { ...originalBook, ...req.body };
-    db = db.filter((book) => book.id != req.params.id);
-    db.push(newBook);
-    res.send("Book Edited");
-  } else {
-    res.status(404).send("Book Not Found");
-  }
-};
-module.exports.deleteBook = (req, res) => {
-  if (db.findIndex((book) => book.id == req.params.id) != -1) {
-    db = db.filter((book) => book.id != req.params.id);
-    res.send("Book Deleted");
-  } else {
-    res.status(404).send("Book Not Found");
-  }
+  },
+  addBook: (req, res) => {
+    const equal = (book) =>
+      book.author == req.body.author && book.title == req.body.title;
+    if (db.findIndex(equal) == -1) {
+      db.push(req.body);
+      if (db.findIndex((book) => book.id == req.body.id) != -1) {
+        res.send("Book Created");
+      } else {
+        res.status(500).send();
+      }
+    } else {
+      res.status(409).send("Book Already Exists");
+    }
+  },
+  editBook: (req, res) => {
+    if (db.findIndex((book) => book.id == req.params.id) != -1) {
+      let originalBook = db.find((book) => book.id == req.params.id);
+      let newBook = { ...originalBook, ...req.body };
+      db = db.filter((book) => book.id != req.params.id);
+      db.push(newBook);
+      res.send("Book Edited");
+    } else {
+      res.status(404).send("Book Not Found");
+    }
+  },
+  deleteBook: (req, res) => {
+    if (db.findIndex((book) => book.id == req.params.id) != -1) {
+      db = db.filter((book) => book.id != req.params.id);
+      res.send("Book Deleted");
+    } else {
+      res.status(404).send("Book Not Found");
+    }
+  },
 };

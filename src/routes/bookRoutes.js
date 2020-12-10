@@ -37,48 +37,63 @@ let db = [
   },
 ];
 
+let seq = require("../db");
+
 module.exports = {
   response: (req, res) => {
     res.send(`Welcome to the Library Project API`);
   },
   getBook: (req, res) => {
-    if (db.findIndex((book) => book.id == req.params.id) != -1) {
-      res.json(db.find((book) => book.id == req.params.id));
-    } else {
-      res.status(404).send("Book Not Found");
-    }
+    // if (db.findIndex((book) => book.id == req.params.id) != -1) {
+    //   res.json(db.find((book) => book.id == req.params.id));
+    // } else {
+    //   res.status(404).send("Book Not Found");
+    // }
+    let connect = seq.connection();
+    seq.getBook(connect, req.params.id, res);
   },
   addBook: (req, res) => {
-    const equal = (book) =>
-      book.author == req.body.author && book.title == req.body.title;
-    if (db.findIndex(equal) == -1) {
-      db.push(req.body);
-      if (db.findIndex((book) => book.id == req.body.id) != -1) {
-        res.send("Book Created");
-      } else {
-        res.status(500).send();
-      }
-    } else {
-      res.status(409).send("Book Already Exists");
-    }
+    // const equal = (book) =>
+    //   book.author == req.body.author && book.title == req.body.title;
+    // if (db.findIndex(equal) == -1) {
+    //   db.push(req.body);
+    //   if (db.findIndex((book) => book.id == req.body.id) != -1) {
+    //     res.send("Book Created");
+    //   } else {
+    //     res.status(500).send();
+    //   }
+    // } else {
+    //   res.status(409).send("Book Already Exists");
+    // }
+    let connect = seq.connection(); //move this to API start *make sure to seperate connection and model
+    seq.addBook(connect, req.body, res);
   },
   editBook: (req, res) => {
-    if (db.findIndex((book) => book.id == req.params.id) != -1) {
-      let originalBook = db.find((book) => book.id == req.params.id);
-      let newBook = { ...originalBook, ...req.body };
-      db = db.filter((book) => book.id != req.params.id);
-      db.push(newBook);
-      res.send("Book Edited");
-    } else {
-      res.status(404).send("Book Not Found");
-    }
+    // if (db.findIndex((book) => book.id == req.params.id) != -1) {
+    //   let originalBook = db.find((book) => book.id == req.params.id);
+    //   let newBook = { ...originalBook, ...req.body };
+    //   db = db.filter((book) => book.id != req.params.id);
+    //   db.push(newBook);
+    //   res.send("Book Edited");
+    // } else {
+    //   res.status(404).send("Book Not Found");
+    // }
+    let connect = seq.connection(); //move this to API start *make sure to seperate connection and model
+    seq.editBook(connect, req.params.id, req.body, res);
   },
   deleteBook: (req, res) => {
-    if (db.findIndex((book) => book.id == req.params.id) != -1) {
-      db = db.filter((book) => book.id != req.params.id);
-      res.send("Book Deleted");
-    } else {
-      res.status(404).send("Book Not Found");
-    }
+    let connect = seq.connection(); //move this to API start *make sure to seperate connection and model
+    seq.deleteBook(connect, req.params.id, res);
+    // if (db.findIndex((book) => book.id == req.params.id) != -1) {
+    //   db = db.filter((book) => book.id != req.params.id);
+    //   res.send("Book Deleted");
+    // } else {
+    //   res.status(404).send("Book Not Found");
+    // }
   },
+
+  getBookList: (req, res) => {
+    let connect = seq.connection(); //move this to API start *make sure to seperate connection and model
+    seq.getBookList(connect, res);
+  }
 };

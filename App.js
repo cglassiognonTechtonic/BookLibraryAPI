@@ -10,10 +10,11 @@ app.use(express.json())
 
 })*/
 
-bookRouter.get('/', bookRoutes.response)
+bookRouter.get(bookRoutes.response)
+bookRouter.get('/book/list', bookRoutes.getBookList)
 bookRouter.get('/book/:id', bookRoutes.getBook)
 bookRouter.post('/book/add/', bookRoutes.addBook)
-bookRouter.post('/book/edit/:id', bookRoutes.editBook)
+bookRouter.patch('/book/edit/:id', bookRoutes.editBook)
 bookRouter.delete('/book/delete/:id', bookRoutes.deleteBook)
 
 app.use('/api/', bookRouter)

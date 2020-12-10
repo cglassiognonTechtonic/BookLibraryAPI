@@ -1,6 +1,5 @@
 const { Sequelize } = require("sequelize");
 
-
 //Centralized Error handlings
 module.exports = {
   addBook: (connection, book, res) => {

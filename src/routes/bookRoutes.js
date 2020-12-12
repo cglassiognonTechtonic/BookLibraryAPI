@@ -19,6 +19,10 @@ const models = require("../controllers/models");
 let query = require("../queries");
 let dbConnection = bookConnection();
 let bookModel = models.bookModel(dbConnection);
+const {uploadImage} = require("../s3");
+const {Base64} = require('js-base64');
+const AWS = require("aws-sdk");
+const fs = require("fs");
 
 module.exports = {
   response: (req, res) => {
@@ -28,9 +32,33 @@ module.exports = {
     query.getBook(bookModel, req.params.id, res);
   },
   addBook: (req, res) => {
+    //if there is an image in the body, also seperate this aws stuff so you can do this for edit
+    //img key based on book-title-author
+    // AWS.config.update({ region: "us-east-2" });
+    // s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+    // s3.upload(
+    //   {
+    //     Bucket: "libraryapibookcovers",
+    //     Key: "testimg32",
+    //     ContentType: "image/jpeg",
+    //     Body: req.body.img,
+    //     ACL: "public-read"
+    //   },
+    //   (err, data) => {
+    //     if (err) {
+    //       console.log("Error uploading", err);
+    //     }
+    //     if (data) {
+    //       console.log(data.Location);
+    //     }
+    //   }
+    // );d
+    console.log(req.body)
+    //uploadImage(req.body.cover).then(data => console.log(data))
     query.addBook(bookModel, req.body, res);
   },
   editBook: (req, res) => {
+    console.log(req.body)
     query.editBook(bookModel, req.params.id, req.body, res);
   },
   deleteBook: (req, res) => {

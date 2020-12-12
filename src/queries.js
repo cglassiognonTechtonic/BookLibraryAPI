@@ -3,15 +3,14 @@ const { Sequelize } = require("sequelize");
 //Centralized Error handlings
 module.exports = {
   addBook: (connection, book, res) => {
-    //s3 image bucket process
     connection
-      .create({ ...book })
+      .create({ ...book, img: null })
       .then((result, err) => {
         if (err) {
           throw "Error inserting data";
         } else {
           console.log(result);
-          res.json(result);
+          res.status(200).json(result);
         }
       })
       .catch((e) => {
@@ -59,18 +58,16 @@ module.exports = {
       });
   },
   editBook: (connection, id, book, res) => {
+    console.log(book);
     connection
-      .update(
-        { ...book },
-        {
-          where: {
-            id: id,
-          },
-        }
-      )
+      .update(book, {
+        where: {
+          id: id,
+        },
+      })
       .then((result, err) => {
-        if ((err, result !== 1)) {
-          throw "Error updating data";
+        if (err) {
+          throw err;
         } else {
           console.log(result);
           res.status(200).end();

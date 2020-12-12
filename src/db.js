@@ -6,6 +6,7 @@ module.exports = {
       "mysql://username:ThisPasswordIsTemporary@localhost:3306/Library",
       {
         logging: console.log,
+        logQueryParameters: true,
       }
     );
     sequelize

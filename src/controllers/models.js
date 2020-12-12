@@ -18,7 +18,7 @@ module.exports = {
         allowNull: false,
       },
       publish_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
       synopsis: {
         type: DataTypes.TEXT,
@@ -29,6 +29,9 @@ module.exports = {
       rating: {
         type: DataTypes.INTEGER,
       },
+      pages: {
+        type: DataTypes.INTEGER,
+      }
     });
     Book.sync()
       .then((result, err) => {

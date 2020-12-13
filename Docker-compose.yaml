@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql
+    environment: 
+      - MYSQL_DB=username
+      - MYSQL_USER=username
+      - MYSQL_PASSWORD=ThisPasswordIsTemporary
+  backend:
+    build: .
+    volumes:
+      - .:/code
+    command: npm ci && npm start
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - db
+      
+

@@ -1,6 +1,5 @@
 const { Sequelize } = require("sequelize");
 
-//Centralized Error handlings
 module.exports = {
   addBook: (connection, book, res) => {
     connection
@@ -9,7 +8,6 @@ module.exports = {
         if (err) {
           throw "Error inserting data";
         } else {
-          console.log(result);
           res.status(200).json(result);
         }
       })
@@ -29,7 +27,6 @@ module.exports = {
         if (err) {
           throw "Error retrieving data";
         } else {
-          console.log(result);
           res.json(result);
         }
       })
@@ -48,8 +45,7 @@ module.exports = {
         if (err) {
           throw "Error retrieving data";
         } else {
-          console.log(result);
-          res.json(result);
+          es.json(result);
         }
       })
       .catch((e) => {
@@ -69,7 +65,6 @@ module.exports = {
         if (err) {
           throw err;
         } else {
-          console.log(result);
           res.status(200).end();
         }
       })
@@ -89,7 +84,6 @@ module.exports = {
         if ((err, result !== 1)) {
           throw "Error rdeleting data";
         } else {
-          console.log(result);
           res.status(200).end();
         }
       })

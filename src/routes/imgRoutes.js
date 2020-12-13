@@ -1,11 +1,7 @@
 const AWS = require("aws-sdk");
-const fs = require("fs")
-const {decode} = require("js-base64")
 
 module.exports = {
     upload: (req, res) => {
-        // console.log("\n\n IMG:", Base64.btoa(req.body.img))
-        fs.writeFileSync('finaltest.jpg', req.body, 'base64')
         AWS.config.update({ region: "us-east-2" });
         s3 = new AWS.S3({ apiVersion: "2006-03-01" });
         s3.upload(
@@ -22,6 +18,7 @@ module.exports = {
             }
             if (data) {
               console.log(data.Location);
+              res.status(200).send(data.Location);
             }
           }
         );

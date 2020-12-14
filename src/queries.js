@@ -8,12 +8,12 @@ module.exports = {
         if (err) {
           throw "Error inserting data";
         } else {
-          res.status(200).json(result);
+          res.status(200).json(result).end();
         }
       })
       .catch((e) => {
         console.error("Error inserting data: ", e);
-        res.status(502).send("Error inserting data");
+        res.status(502).send("Error inserting data").end();
       });
   },
   getBook: (connection, id, res) => {
@@ -27,12 +27,12 @@ module.exports = {
         if (err) {
           throw "Error retrieving data";
         } else {
-          res.json(result);
+          res.json(result).end();
         }
       })
       .catch((e) => {
         console.error("Error retrieving data: ", e);
-        res.status(502).send("Error retrieving data");
+        res.status(502).send("Error retrieving data").end();
       });
   },
   getBookList: (connection, res) => {
@@ -45,12 +45,12 @@ module.exports = {
         if (err) {
           throw "Error retrieving data";
         } else {
-          es.json(result);
+          res.json(result).end();
         }
       })
       .catch((e) => {
         console.error("Error retrieving data: ", e);
-        res.status(502).send("Error retrieving data");
+        res.status(502).send("Error retrieving data").end();
       });
   },
   editBook: (connection, id, book, res) => {
@@ -70,7 +70,7 @@ module.exports = {
       })
       .catch((e) => {
         console.error("Error updating data: ", e);
-        res.status(500).send("Error updating data");
+        res.status(500).send("Error updating data").end();
       });
   },
   deleteBook: (connection, id, res) => {
@@ -89,7 +89,7 @@ module.exports = {
       })
       .catch((e) => {
         console.error("Error deleting data: ", e);
-        res.status(502).send("Error deleting data");
+        res.status(502).send("Error deleting data").end();
       });
   },
 };

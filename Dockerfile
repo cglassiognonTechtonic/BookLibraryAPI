@@ -1,12 +1,13 @@
-FROM node:15.3.0
+FROM node:15.3.0-buster-slim
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json","./"]
+COPY ["package.json", "package-lock.json*","./"]
 
 RUN npm install --production
 
 COPY . .
+EXPOSE 8080
 
-CMD ["node", "App.js"]
+CMD ["npm", "start"]

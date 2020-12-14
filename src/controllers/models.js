@@ -1,5 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
+const { DataTypes } = require("sequelize");
 module.exports = {
   bookModel: (dbConnection) => {
     let Book = dbConnection.define("Book", {

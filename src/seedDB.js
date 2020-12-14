@@ -316,23 +316,25 @@ June and Day have sacrificed so much for the people of the Republic--and each ot
   },
 ];
 
+const {bookConnection} = require("../src/db")
+const {bookModel} = require("./controllers/models");
+
 module.exports = {
-  seedDB: () => {
-    let dbConnection = bookConnection();
-    let bookModel = models.bookModel(dbConnection);
+  seedDB: (bookModel) => {
+    console.log("Runnings")
     books.map((book) => {
      bookModel
       .create(book)
       .then((result, err) => {
         if (err) {
-          throw "Error inserting data";
+          throw err
         } else {
-          res.status(200).json(result);
+          console.log(result)
         }
       })
       .catch((e) => {
         console.error("Error inserting data: ", e);
-        res.status(502).send("Error inserting data");
+        console.log("Error inserting data");
       });       
     })
   },

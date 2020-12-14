@@ -1,12 +1,10 @@
 const { bookConnection } = require("../db");
 const models = require("../controllers/models");
+const seed = require('../seedDB')
 let query = require("../queries");
 let dbConnection = bookConnection();
 let bookModel = models.bookModel(dbConnection);
-const {uploadImage} = require("../s3");
-const {Base64} = require('js-base64');
-const AWS = require("aws-sdk");
-const fs = require("fs");
+seed.seedDB(bookModel)
 
 module.exports = {
   response: (req, res) => {

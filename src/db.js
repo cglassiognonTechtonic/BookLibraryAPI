@@ -3,7 +3,8 @@ const { Sequelize } = require("sequelize");
 module.exports = {
   bookConnection: () => {
     const sequelize = new Sequelize(
-      "mysql://username:ThisPasswordIsTemporary@localhost:3306/Library",
+      "mysql://docker:JustReadTheInstructions@db:3306/Library",
+      // "mysql://username:ThisPasswordIsTemporary@localhost:3306/Library",
       {
         logging: console.log,
         logQueryParameters: true,

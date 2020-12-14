@@ -2,3 +2,5 @@ node_modules
 /coverage
 testimages/
 test.js
+src/S3.js
+src/controllers/Auth.js

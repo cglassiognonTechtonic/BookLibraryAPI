@@ -7,7 +7,7 @@ const imgRoutes = require('./src/routes/imgRoutes')
 const bookRouter = express.Router();
 const imgRouter = express.Router();
 
-bookRouter.get(bookRoutes.response)
+bookRouter.get('/', bookRoutes.response)
 bookRouter.get('/book/list', bookRoutes.getBookList)
 bookRouter.get('/book/:id', bookRoutes.getBook)
 bookRouter.post('/book/add/', bookRoutes.addBook)

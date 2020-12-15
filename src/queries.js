@@ -3,7 +3,7 @@ const { Sequelize } = require("sequelize");
 module.exports = {
   addBook: (connection, book, res) => {
     connection
-      .create({ ...book, img: null })
+      .create(book)
       .then((result, err) => {
         if (err) {
           throw "Error inserting data";
@@ -38,8 +38,8 @@ module.exports = {
   getBookList: (connection, res) => {
     connection
       .findAll({
-        attributes: ["id", "title", "author", "cover"],
-        limit: 20,
+        attributes: ["id", "title", "author", "img"],
+        // limit: 20,
       })
       .then((result, err) => {
         if (err) {

@@ -16,7 +16,7 @@ services:
       - fullstack
   backend:
     build: .
-    restart: unless-stopped
+    restart: always
     ports:
       - "8000:8000"
     depends_on: 

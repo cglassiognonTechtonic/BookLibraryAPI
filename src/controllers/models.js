@@ -22,7 +22,7 @@ module.exports = {
       synopsis: {
         type: DataTypes.TEXT,
       },
-      cover: {
+      img: {
         type: DataTypes.STRING(100),
       },
       rating: {
@@ -40,6 +40,7 @@ module.exports = {
       })
       .catch((e) => {
         console.error("Error syncing DB");
+        process.exit(1)
       });
     return Book;
   },

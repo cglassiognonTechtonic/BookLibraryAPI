@@ -7,9 +7,10 @@ const imgRoutes = require('./src/routes/imgRoutes')
 const bookRouter = express.Router();
 const imgRouter = express.Router();
 
-bookRouter.get(bookRoutes.response)
+bookRouter.get('/', bookRoutes.response)
 bookRouter.get('/book/list', bookRoutes.getBookList)
 bookRouter.get('/book/:id', bookRoutes.getBook)
+bookRouter.get('/book/check/:title/:author', bookRoutes.checkIfExists)
 bookRouter.post('/book/add/', bookRoutes.addBook)
 bookRouter.post('/book/edit/:id',bookRoutes.editBook)
 bookRouter.delete('/book/delete/:id', bookRoutes.deleteBook)
@@ -28,6 +29,6 @@ app.use(allowCrossDomain);
 app.use('/api/', bookRouter)
 app.use('/img/', imgRouter)
 
-app.listen(4567, () => {
+app.listen(8000, () => {
     console.log("App Started")
 })

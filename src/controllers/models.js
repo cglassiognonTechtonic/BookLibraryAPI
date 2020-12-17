@@ -1,5 +1,4 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
+const { DataTypes } = require("sequelize");
 module.exports = {
   bookModel: (dbConnection) => {
     let Book = dbConnection.define("Book", {
@@ -17,14 +16,14 @@ module.exports = {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      publish_date: {
+      published_date: {
         type: DataTypes.DATEONLY,
       },
       synopsis: {
         type: DataTypes.TEXT,
       },
-      cover: {
-        type: DataTypes.STRING(100),
+      img: {
+        type: DataTypes.STRING(200),
       },
       rating: {
         type: DataTypes.INTEGER,
@@ -41,6 +40,7 @@ module.exports = {
       })
       .catch((e) => {
         console.error("Error syncing DB");
+        process.exit(1)
       });
     return Book;
   },

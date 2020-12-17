@@ -251,12 +251,12 @@ CHERUB agents are highly trained, extremely talented—and all under the age of 
   },
   {
     title: "Skeleton Key",
-    author: "Michael Scott",
+    author: "Anthony Horowitz",
     published_date: "2004-4-12",
     synopsis: `Alex Rider has been through a lot for his fourteen years. He's been shot at by international terrorists, chased down a mountainside on a makeshift snowboard, and has stood face-to-face with pure evil. Twice, young Alex has managed to save the world. And twice, he has almost been killed doing it. But now Alex faces something even more dangerous. The desperation of a man who has lost everything he cared for: his country and his only son. A man who just happens to have a nuclear weapon and a serious grudge against the free world. To see his beloved Russia once again be a dominant power, he will stop at nothing. Unless Alex can stop him first... Uniting forces with America's own CIA for the first time, teen spy Alex Rider battles terror from the sun-baked beaches of Miami all the way to the barren ice fields of northernmost Russia.`,
     rating: 5,
     pages: 352,
-    img: "https://libraryapibookcovers.s3.us-east-2.amazonaws.com/skeletonkey-michaelscott.jpg"
+    img: "https://libraryapibookcovers.s3.us-east-2.amazonaws.com/skeletonkey-anthonyhorowitz.jpg"
   },
   {
     title: "Michael Vey: The Prisoner of Cell 25",
@@ -316,23 +316,23 @@ June and Day have sacrificed so much for the people of the Republic--and each ot
   },
 ];
 
+
 module.exports = {
-  seedDB: () => {
-    let dbConnection = bookConnection();
-    let bookModel = models.bookModel(dbConnection);
+  seedDB: (bookModel) => {
+    console.log("Runnings")
     books.map((book) => {
      bookModel
       .create(book)
       .then((result, err) => {
         if (err) {
-          throw "Error inserting data";
+          throw err
         } else {
-          res.status(200).json(result);
+          console.log(result)
         }
       })
       .catch((e) => {
         console.error("Error inserting data: ", e);
-        res.status(502).send("Error inserting data");
+        console.log("Error inserting data");
       });       
     })
   },

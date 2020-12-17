@@ -1,5 +1,4 @@
 const AWS = require("aws-sdk");
-
 module.exports = {
     upload: (req, res) => {
         AWS.config.update({ region: "us-east-2" });
@@ -18,7 +17,7 @@ module.exports = {
             }
             if (data) {
               console.log(data.Location);
-              res.status(200).send(data.Location);
+              res.status(200).json({img: data.Location}).end();
             }
           }
         );

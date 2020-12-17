@@ -316,8 +316,6 @@ June and Day have sacrificed so much for the people of the Republic--and each ot
   },
 ];
 
-const {bookConnection} = require("../src/db")
-const {bookModel} = require("./controllers/models");
 
 module.exports = {
   seedDB: (bookModel) => {

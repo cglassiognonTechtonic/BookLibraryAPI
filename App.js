@@ -10,6 +10,7 @@ const imgRouter = express.Router();
 bookRouter.get('/', bookRoutes.response)
 bookRouter.get('/book/list', bookRoutes.getBookList)
 bookRouter.get('/book/:id', bookRoutes.getBook)
+bookRouter.get('/book/check/:title/:author', bookRoutes.checkIfExists)
 bookRouter.post('/book/add/', bookRoutes.addBook)
 bookRouter.post('/book/edit/:id',bookRoutes.editBook)
 bookRouter.delete('/book/delete/:id', bookRoutes.deleteBook)

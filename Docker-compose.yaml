@@ -1,13 +1,13 @@
-version: "3.9"
+version: "3"
 
 services:
   db:
     image: mysql:latest
     environment:
-      - MYSQL_DATABASE=Library
-      - MYSQL_USER=docker
-      - MYSQL_PASSWORD=JustReadTheInstructions
-      - MYSQL_ROOT_PASSWORD=test1234
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     ports:
       - "3306:3306"
     expose: 
@@ -15,6 +15,8 @@ services:
     networks:
       - fullstack
   backend:
+    env_file:
+      - .env
     build: .
     restart: always
     ports:

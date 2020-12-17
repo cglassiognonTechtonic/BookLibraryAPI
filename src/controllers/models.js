@@ -16,14 +16,14 @@ module.exports = {
         type: DataTypes.STRING(50),
         allowNull: false,
       },
-      publish_date: {
+      published_date: {
         type: DataTypes.DATEONLY,
       },
       synopsis: {
         type: DataTypes.TEXT,
       },
       img: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(200),
       },
       rating: {
         type: DataTypes.INTEGER,

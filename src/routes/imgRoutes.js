@@ -1,11 +1,13 @@
 const AWS = require("aws-sdk");
+require('dotenv').config()
+
 module.exports = {
     upload: (req, res) => {
         AWS.config.update({ region: "us-east-2" });
         s3 = new AWS.S3({ apiVersion: "2006-03-01" });
         s3.upload(
           {
-            Bucket: "libraryapibookcovers",
+            Bucket: process.env.S3_BUCKET,
             Key: `${req.params.key}`,
             ContentType: "image/jpeg",
             Body: Buffer.from(req.body, 'base64'),

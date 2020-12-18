@@ -1,5 +1,29 @@
-# NodeJS Version of BookLibraryAPI
+# BookLibraryAPI (NodeJS)
 #### Author : Christian Glassiognon
+#### Version : 0.8
+<br/>
+
+## Using API & DB Locally or on a Virtual Machine (Docker Compose)
+Docker-compose defines and runs multiple-container docker apps. It is used in this API to run the NodeJS API and the Mysql db image simultaneously.
+
+### To run the API & DB using Docker Compose (MacOS)
+Make sure that you set the port of the mysql db different than any locally running db. 
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) for MacOS 
+2. Clone this git repository to your preffered code directory.
+3. Open the .env variable and fill in the variables
+4. Run "sudo Docker-compose up --build -d" to run the service detached (without taking up the console) 
+5. (a) Run "sudo Docker-compose down" to stop the service and remove the containers **and their data**. 
+5. (b) Run "sudo Docker-compose stop" to stop the service.
+
+<br/>
+
+### To run the API and connect to seperate locally running db (MacOS)
+1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop) for MacOS 
+2. Clone this git repository to your preffered code directory.
+3. Open the .env variable and fill in the variables
+4. Run "sudo Docker build -t libraryapi"
+5. Run "sudo Docker run libraryapi"
+
 <br/>
 
 ## ('/api') API Routes
@@ -176,6 +200,8 @@ Request (DELETE): url/api/book/delete/:1
 ```
 Response: 200
 ```
+<br/>
+
 ## ('/img') IMG Routes
 ## ('/upload/:key) Upload Image to database 
 Returns 200 if image upload is succesful.
@@ -187,5 +213,10 @@ Body: (base64 image)
 Response: 200
 https://libraryapibookcovers.s3.us-east-2.amazonaws.com/insignia-sjkincaid.jpg
 ```
+<br/>
+
+#### Java Version coming soon™
+#### Article on how I made this coming soon™™™
+#### Testing & CI/CD coming soon™™™
 
 

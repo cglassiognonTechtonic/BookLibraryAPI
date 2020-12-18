@@ -6,8 +6,10 @@ module.exports = {
     let user = process.env.DB_USER;
     let pass = process.env.DB_PASSWORD;
     let database = process.env.DB_DATABASE;
+    let host = process.env.DB_HOST
+    let port = process.env.DB_PORT
     const sequelize = new Sequelize(
-      `mysql://${user}:${pass}@db:3306/${database}`,
+      `mysql://${user}:${pass}@${host}:${port}/${database}`,
       {
         logging: console.log,
         logQueryParameters: true,

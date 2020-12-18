@@ -1,7 +1,0 @@
-setup:
-  config:
-    S3_BUCKET: libraryapibookcovers
-build:
-  docker:
-    service: Docker-compose.yml
-    worker: worker/Docker-compose.yml

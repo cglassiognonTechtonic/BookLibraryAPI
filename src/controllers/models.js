@@ -9,11 +9,11 @@ module.exports = {
         primaryKey: true,
       },
       title: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(200),
         allowNull: false,
       },
       author: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING(200),
         allowNull: false,
       },
       published_date: {

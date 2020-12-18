@@ -16,6 +16,7 @@ module.exports = {
           (err, data) => {
             if (err) {
               console.log("Error uploading", err);
+              res.status(502).send("Error Uploading Image").end()
             }
             if (data) {
               console.log(data.Location);

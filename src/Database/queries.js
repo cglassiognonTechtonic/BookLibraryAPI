@@ -2,27 +2,27 @@ const { Sequelize } = require("sequelize");
 
 module.exports = {
   addBook: (connection, book, res) => {
-    connection
-      .findAll({
-        where: {
-          name: book.name,
-          author: book.author,
-        },
-      })
-      .then((result, err) => {
-        if (err) {
-          throw "Error retrieving data";
-        } else {
-          if (result !== []) {
-            res.send(400).send("Error, Book Already exists").end();
-          }
-        }
-      })
-      .catch((e) => {
-        console.error("Error retrieving data: ", e);
-        res.status(502).send("Error retrieving data").end();
-      })
-      .then(() => {
+    // connection
+    //   .findAll({
+    //     where: {
+    //       name: book.name,
+    //       author: book.author,
+    //     },
+    //   })
+    //   .then((result, err) => {
+    //     if (err) {
+    //       throw "Error retrieving data";
+    //     } else {
+    //       if (result !== []) {
+    //         res.send(400).send("Error, Book Already exists").end();
+    //       }
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.error("Error retrieving data: ", e);
+    //     res.status(502).send("Error retrieving data").end();
+    //   })
+    //   .then(() => {
         connection
           .create(book)
           .then((result, err) => {
@@ -36,8 +36,7 @@ module.exports = {
             console.error("Error inserting data: ", e);
             res.status(400).send("Error inserting data").end();
           });
-      });
-  },
+      },
   getBook: (connection, id, res) => {
     connection
       .findAll({
@@ -128,7 +127,7 @@ module.exports = {
           throw "Error retrieving data";
         } else {
           if (result.length === 0) {
-            res.status(101).end()
+            res.status(101).send("Book Does Not Exist").end()
           } else {
             res.status(400).send("Book Already Created")
           }
